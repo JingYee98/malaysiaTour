@@ -65,8 +65,6 @@ class _MainScreenState extends State<MainScreen> {
                   });
                 },
               ),
-
-              //
             ],
           ),
           body: Container(
@@ -442,6 +440,7 @@ class _MainScreenState extends State<MainScreen> {
     }).catchError((err) {
       print(err);
     });
+    _loadPref();
   }
 
   Future<bool> _onBackPressed() {
@@ -505,6 +504,7 @@ class _MainScreenState extends State<MainScreen> {
           var extractdata = json.decode(res.body);
           destData = extractdata["locations"];
           FocusScope.of(context).requestFocus(new FocusNode());
+
           pr.hide();
         });
       }).catchError((err) {
@@ -516,6 +516,7 @@ class _MainScreenState extends State<MainScreen> {
       Toast.show("Error", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
+    _savePref();
   }
 
   _onImageDisplay(int index) {
@@ -538,7 +539,6 @@ class _MainScreenState extends State<MainScreen> {
                       height: screenWidth / 1.5,
                       width: screenWidth / 1.5,
                       decoration: BoxDecoration(
-                          //border: Border.all(color: Colors.black),
                           image: DecorationImage(
                               fit: BoxFit.scaleDown,
                               image: NetworkImage(
@@ -568,5 +568,16 @@ class _MainScreenState extends State<MainScreen> {
             builder: (BuildContext context) => InfoScreen(
                   loc: _loc,
                 )));
+  }
+
+  _savePref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('state', curstate);
+  }
+
+  _loadPref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    curstate = prefs.getString('state');
+    return curstate;
   }
 }

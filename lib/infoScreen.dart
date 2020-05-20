@@ -101,7 +101,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             TableCell(
                               child: Container(
                                   alignment: Alignment.centerLeft,
-                                  height: 30,
+                                  height: 40,
                                   child: Text("URL",
                                       style: TextStyle(
                                           fontSize: 18,
@@ -111,7 +111,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             TableCell(
                               child: Container(
                                 alignment: Alignment.centerLeft,
-                                height: 30,
+                                height: 40,
                                 child: GestureDetector(
                                   child: Text(widget.loc.url,
                                       style: TextStyle(
